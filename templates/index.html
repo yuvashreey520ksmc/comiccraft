@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ app_name }} — AI Comic Story Creator</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="logo">ComicsCraft ✦</a>
+    <div class="nav-links">
+      <a href="/">Create</a>
+      <a href="/docs" target="_blank">API Docs</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="hero">
+      <h1>Turn ideas into comics</h1>
+      <p>
+        Powered by Gemini for story & dialogue. Generate a 5-panel comic with
+        illustrations and download it as a PDF.
+      </p>
+    </section>
+
+    <div class="form-card">
+      <form method="post" action="/generate" onsubmit="document.getElementById('loading').classList.add('active')">
+        <div class="form-group">
+          <label for="prompt">Story Prompt *</label>
+          <textarea id="prompt" name="prompt" required placeholder="e.g. A brave fox exploring an enchanted forest looking for a lost star..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="character">Main Character Name</label>
+            <input type="text" id="character" name="character" value="Felix" placeholder="Hero name" />
+          </div>
+          <div class="form-group">
+            <label for="setting">Setting</label>
+            <select id="setting" name="setting">
+              <option value="forest">Forest</option>
+              <option value="city">City</option>
+              <option value="space">Space</option>
+              <option value="school">School</option>
+              <option value="ocean">Ocean</option>
+              <option value="desert">Desert</option>
+              <option value="castle">Castle</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tone">Story Tone</label>
+            <select id="tone" name="tone">
+              <option value="adventurous">Adventurous</option>
+              <option value="funny">Funny</option>
+              <option value="dramatic">Dramatic</option>
+              <option value="light-hearted">Light-hearted</option>
+              <option value="poetic">Poetic</option>
+              <option value="mysterious">Mysterious</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="art_style">Art Style</label>
+            <select id="art_style" name="art_style">
+              <option value="comic book">Comic Book</option>
+              <option value="anime">Anime</option>
+              <option value="cartoon">Cartoon</option>
+              <option value="pixel art">Pixel Art</option>
+              <option value="realistic">Realistic</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">✨ Generate My Comic</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>{{ app_name }} — AI Comic Story Creator · Gemini + Panel Illustrations</p>
+  </footer>
+
+  <div class="loading-overlay" id="loading">
+    <div class="spinner"></div>
+    <p>Creating your comic story &amp; panels…</p>
+    <p style="color:var(--muted); font-size:0.9rem;">This may take 15–40 seconds</p>
+  </div>
+</body>
+</html>

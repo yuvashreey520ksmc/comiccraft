@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comic Preview — {{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="logo">ComicsCraft ✦</a>
+    <div class="nav-links">
+      <a href="/">Create New</a>
+      <a href="/docs" target="_blank">API</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="hero" style="padding-bottom:0.5rem;">
+      <h1>{{ title }}</h1>
+      <div class="meta-bar">
+        <span class="badge">👤 {{ character }}</span>
+        <span class="badge">🎭 {{ tone }}</span>
+        <span class="badge">🎨 {{ art_style }}</span>
+      </div>
+    </section>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/download?path={{ pdf_path | urlencode }}">📄 Download PDF</a>
+      <a class="btn btn-secondary" href="/export-success?pdf={{ pdf_path | urlencode }}">Export Success Page</a>
+      <a class="btn btn-secondary" href="/">Create Another</a>
+    </div>
+
+    {% for panel in layout %}
+    <article class="panel-card">
+      <div class="panel-header">
+        Panel {{ panel.panel_number }}: {{ panel.title }}
+      </div>
+      {% if panel.image %}
+      <img class="panel-image" src="{{ panel.image }}" alt="Panel {{ panel.panel_number }}" />
+      {% endif %}
+      <div class="panel-body">
+        {% if panel.scene_description %}
+        <p class="scene">{{ panel.scene_description }}</p>
+        {% endif %}
+        <div class="narration">{{ panel.narration }}</div>
+        {% if panel.image_prompt %}
+        <p class="prompt-ref">Image prompt: {{ panel.image_prompt[:160] }}{% if panel.image_prompt|length > 160 %}…{% endif %}</p>
+        {% endif %}
+      </div>
+    </article>
+    {% endfor %}
+
+    <div class="actions">
+      <a class="btn btn-primary" href="/download?path={{ pdf_path | urlencode }}">📄 Download Your Comic as PDF</a>
+      <a class="btn btn-accent" href="/">✦ Create Another Comic</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>{{ app_name }} · Generated with Gemini AI</p>
+  </footer>
+</body>
+</html>

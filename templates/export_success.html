@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Export Success — {{ app_name }}</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="logo">ComicsCraft ✦</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="success-box">
+      <h1>✓ Comic Exported!</h1>
+      <p>
+        Your AI-powered comic has been created successfully.
+        {% if pdf_path %}
+        You can download it anytime from the link below.
+        {% else %}
+        Return to the preview page to download your PDF.
+        {% endif %}
+      </p>
+      {% if pdf_path %}
+      <a class="btn btn-primary" href="/download?path={{ pdf_path | urlencode }}" style="margin-bottom:1rem;">
+        📄 Download PDF Again
+      </a>
+      <br />
+      {% endif %}
+      <a class="btn btn-accent" href="/">Go Create Another Comic</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>{{ app_name }} — Thanks for creating with us!</p>
+  </footer>
+</body>
+</html>
